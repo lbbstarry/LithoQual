@@ -8,7 +8,7 @@ Baseline A -- Otsu global thresholding + morphological cleanup.
 Baseline B -- Canny edge detection + morphological closing + flood-fill from border.
 
 Both baselines emit a binary mask on the same H x W grid as the reference mask,
-which is then routed through specedge.metrology.evaluate_metrology_pair on
+which is then routed through lithoqual.metrology.evaluate_metrology_pair on
 identical footing with the neural frontends. IoU / BF1 are computed alongside
 CD / LWR / LER MAE so the two baselines slot straight into Table II and the
 Extreme summary table.
@@ -27,8 +27,8 @@ from PIL import Image
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from specedge.metrics import boundary_f1  # noqa: E402
-from specedge.metrology import evaluate_metrology_pair  # noqa: E402
+from lithoqual.metrics import boundary_f1  # noqa: E402
+from lithoqual.metrology import evaluate_metrology_pair  # noqa: E402
 
 
 OUT_ROOT = REPO_ROOT / "output" / "revision_v4" / "e11_classical"

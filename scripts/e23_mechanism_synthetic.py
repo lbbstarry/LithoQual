@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 OUT = ROOT / "output" / "revision_v4" / "e23_mechanism"
 
-from specedge.metrology import (  # noqa: E402
+from lithoqual.metrology import (  # noqa: E402
     estimate_dominant_orientation,
     evaluate_metrology_pair,
 )

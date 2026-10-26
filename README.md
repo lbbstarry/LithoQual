@@ -1,4 +1,4 @@
-# SpecEdge
+# LithoQual
 
 English | [中文](README_zh.md)
 
@@ -46,7 +46,7 @@ disagreement. Expected output: `91/91 claims verified`.
 ## Layout
 
 ```
-specedge/
+lithoqual/
   metrology.py          mask -> metrology record (CD, LWR, LER, PSD, topology)
   metrics.py            overlap metrics
   metrics_psd.py        edge-PSD metrics
@@ -67,7 +67,7 @@ output/revision_v4/     aggregated results (no images), enough to re-derive ever
 ## Setup
 
 ```bash
-conda create -n specedge python=3.10 && conda activate specedge
+conda create -n lithoqual python=3.10 && conda activate lithoqual
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirements.txt
 ```
@@ -140,7 +140,7 @@ The aggregates contain measurement values and zero-padded sample indices only, n
 imagery.
 
 Applying the protocol to other data needs a directory of binary masks and a matching
-reference; nothing in `specedge/metrology.py` or the guard is specific to this dataset.
+reference; nothing in `lithoqual/metrology.py` or the guard is specific to this dataset.
 
 ## Not included
 

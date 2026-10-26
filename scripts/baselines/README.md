@@ -21,9 +21,9 @@ scripts/baselines/
 ```
 
 支撑模块:
-- `specedge/data/litho_dataset.py` — 光刻 SEM dataset
-- `specedge/baselines/registry.py` — 模型注册与构建
-- `specedge/metrics_psd.py` — 边缘 PSD 高频能量比指标
+- `lithoqual/data/litho_dataset.py` — 光刻 SEM dataset
+- `lithoqual/baselines/registry.py` — 模型注册与构建
+- `lithoqual/metrics_psd.py` — 边缘 PSD 高频能量比指标
 
 ## 使用流程
 

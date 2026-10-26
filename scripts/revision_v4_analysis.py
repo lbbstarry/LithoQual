@@ -33,7 +33,7 @@ from scipy.optimize import minimize
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 
-from specedge.metrology import evaluate_metrology_pair, mask_metrology
+from lithoqual.metrology import evaluate_metrology_pair, mask_metrology
 
 OUT = REPO / "output/revision_v4"
 OUT.mkdir(parents=True, exist_ok=True)

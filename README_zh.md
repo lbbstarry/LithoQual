@@ -1,4 +1,4 @@
-# SpecEdge
+# LithoQual
 
 [English](README.md) | 中文
 
@@ -42,7 +42,7 @@ python scripts/verify_claims.py
 ## 目录结构
 
 ```
-specedge/
+lithoqual/
   metrology.py          掩膜 -> 量测记录（CD、LWR、LER、PSD、拓扑）
   metrics.py            重叠度指标
   metrics_psd.py        边缘 PSD 指标
@@ -63,7 +63,7 @@ output/revision_v4/     聚合结果（无图像），足以重新推出每一�
 ## 环境配置
 
 ```bash
-conda create -n specedge python=3.10 && conda activate specedge
+conda create -n lithoqual python=3.10 && conda activate lithoqual
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirements.txt
 ```
@@ -131,7 +131,7 @@ SEM 采集图像及由其导出的参考掩膜属于产线材料，不可再分�
 脚本产出的聚合逐样本结果。聚合结果只含测量值和零填充的样本编号，不含任何图像。
 
 将该协议应用到其他数据，只需要一个二值掩膜目录和一份配套参考；
-`specedge/metrology.py` 与监测器中没有任何为本数据集特化的部分。
+`lithoqual/metrology.py` 与监测器中没有任何为本数据集特化的部分。
 
 ## 未包含的内容
 

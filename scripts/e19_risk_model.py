@@ -66,7 +66,7 @@ EXTREME_PRED = REPO_ROOT / "output/hard_eval/{m}/preds/masks"
 OUT_DIR = REPO_ROOT / "output/revision_v4/e19_risk_model"
 
 MODELS = ("unet", "deeplabv3plus", "hrnet", "segformer")
-RISK_THRESHOLD = 0.25  # matches specedge/metrology.py
+RISK_THRESHOLD = 0.25  # matches lithoqual/metrology.py
 N_BINS = 10
 
 

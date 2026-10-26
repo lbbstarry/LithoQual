@@ -34,7 +34,7 @@ from PIL import Image
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from specedge.metrology import mask_metrology
+from lithoqual.metrology import mask_metrology
 
 
 IMG_EXTS = (".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp")

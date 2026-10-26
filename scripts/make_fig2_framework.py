@@ -1,4 +1,4 @@
-"""Figure 2 (framework / measurement principle) for the SpecEdge paper.
+"""Figure 2 (framework / measurement principle) for the LithoQual paper.
 
 Layout: schematic-led composite.
   Top band (~50% height): pipeline schematic with real thumbnails --

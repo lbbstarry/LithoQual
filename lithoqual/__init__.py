@@ -1,4 +1,4 @@
-"""SpecEdge: mask-to-metrology extraction and segmentation qualification.
+"""LithoQual: mask-to-metrology extraction and segmentation qualification.
 
 Three things the experiments in this folder use: the deterministic
 mask-to-metrology extractor, the overlap and edge-PSD metrics, and the

@@ -4,7 +4,7 @@
   dataset/SEM/ADI_train/*.bmp        (RGBA SEM 图像)
   dataset/SEM/train_new_gt/*.{png,jpg}  (二值 GT, 但有 jpg 压坏的)
 
-输出 (对接 specedge.data.litho_dataset.LithoSegDataset):
+输出 (对接 lithoqual.data.litho_dataset.LithoSegDataset):
   dataset/litho/
     images/{train,val,test}/<stem>.png   (RGB)
     masks/{train,val,test}/<stem>.png    ({0, 255} 二值)

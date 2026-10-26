@@ -33,8 +33,8 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 
 from scripts.baselines._cfg import load_config
-from specedge.baselines import build_model
-from specedge.metrology import evaluate_metrology_pair
+from lithoqual.baselines import build_model
+from lithoqual.metrology import evaluate_metrology_pair
 
 IMG_DIR = REPO / "dataset/litho_hard/images/hard"
 REF_DIR = REPO / "dataset/litho_hard/masks/hard"

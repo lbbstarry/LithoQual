@@ -6,7 +6,7 @@ scoring the flags that can be derived from a single mask, and asks a narrower
 question: when the reference mask says a wafer carries a given DFM risk, does
 the frontend's prediction say the same thing?
 
-Flags scored (threshold 0.25 matches ``specedge/metrology.py``):
+Flags scored (threshold 0.25 matches ``lithoqual/metrology.py``):
 
     necking   necking_score > 0.25    line pinching, an open-circuit risk
     bulging   bulging_score > 0.25    line swelling, a bridging risk

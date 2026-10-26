@@ -29,7 +29,7 @@ from scipy import ndimage as ndi
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from specedge.metrology import binarize_mask, connected_components, estimate_dominant_orientation
+from lithoqual.metrology import binarize_mask, connected_components, estimate_dominant_orientation
 
 
 @dataclass

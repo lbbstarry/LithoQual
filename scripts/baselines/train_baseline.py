@@ -25,9 +25,9 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.baselines._cfg import load_config
-from specedge.baselines import build_model
-from specedge.data.litho_dataset import LithoSegDataset, SimpleAugment
-from specedge.metrics_psd import evaluate_pair
+from lithoqual.baselines import build_model
+from lithoqual.data.litho_dataset import LithoSegDataset, SimpleAugment
+from lithoqual.metrics_psd import evaluate_pair
 
 
 def parse_args() -> argparse.Namespace:

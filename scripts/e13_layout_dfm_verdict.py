@@ -1,6 +1,6 @@
 """E13: layout-referenced absolute DFM verdicts.
 
-``specedge/metrology.py`` already emits ``bridge_candidate`` /
+``lithoqual/metrology.py`` already emits ``bridge_candidate`` /
 ``open_candidate``, but defines them *relative to the reference mask*
 (``pred_cc < gt_cc``), which makes them segmentation-error indicators rather
 than design decisions. A fab has no reference mask at runtime; what it has is

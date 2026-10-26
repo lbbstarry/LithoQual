@@ -1,4 +1,4 @@
-"""Overview figure for the SpecEdge paper -- the six-panel argument plate.
+"""Overview figure for the LithoQual paper -- the six-panel argument plate.
 
 Layout: image plate on top, supporting quantitative row below.
   Image strip, ~55% height, dark-plate styling: one Extreme sample

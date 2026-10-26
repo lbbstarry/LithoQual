@@ -56,7 +56,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.baselines._cfg import load_config  # noqa: E402
-from specedge.baselines import build_model  # noqa: E402
+from lithoqual.baselines import build_model  # noqa: E402
 
 OUT_DIR = REPO_ROOT / "output/revision_v4/e20_uncertainty_baselines"
 DISAGREEMENT = REPO_ROOT / "output/revision_v4/e4_disagreement.csv"
