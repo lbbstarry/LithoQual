@@ -27,25 +27,29 @@ ARTIFACTS = ROOT / "output" / "revision_v4"
 # trailing zeros, because the printed precision sets the comparison tolerance.
 CLAIMS: list[tuple[str, str, str, str, str]] = [
     # --- Section V, reference noise floor -------------------------------
-    ("2.42", "V-B", "e1b_noise_floor.json",
+    ("2.30", "V-B", "e1b_noise_floor.json",
      "standard.systematic_1px.cd_mean.mean", "CD sigma_ref, in-distribution"),
-    ("2.65", "V-B", "e1b_noise_floor.json",
+    ("2.38", "V-B", "e1b_noise_floor.json",
      "extreme.systematic_1px.cd_mean.mean", "CD sigma_ref, Extreme (= tau_sigma)"),
     ("0.17", "V-B", "e1b_noise_floor.json",
      "standard.systematic_1px.lwr_3sigma.mean", "LWR sigma_ref, in-distribution"),
-    ("0.27", "V-B", "e1b_noise_floor.json",
+    ("0.21", "V-B", "e1b_noise_floor.json",
      "extreme.systematic_1px.lwr_3sigma.mean", "LWR sigma_ref, Extreme"),
-    ("0.08", "V-B", "e1b_noise_floor.json",
+    ("0.09", "V-B", "e1b_noise_floor.json",
      "standard.systematic_1px.ler_mean_3sigma.mean", "LER sigma_ref, in-distribution"),
-    ("0.13", "V-B", "e1b_noise_floor.json",
+    ("0.11", "V-B", "e1b_noise_floor.json",
      "extreme.systematic_1px.ler_mean_3sigma.mean", "LER sigma_ref, Extreme"),
 
     # --- Section VIII-B, failure onset ----------------------------------
     ("0.454", "VIII-B", "e3_onset.json", "breakpoint", "breakpoint estimate"),
-    ("0.304", "VIII-B", "e3_onset.json", "breakpoint_ci95.0",
+    # The n-out-of-n interval is quoted from the same 2000-replicate run (e24)
+    # that gives the 59-distinct / 29% / 86.5% statistics beside it.
+    ("0.294", "VIII-B", "e24_breakpoint_ci/summary.json", "n_of_n.ci95.0",
      "n-out-of-n CI low, quoted only to reject as optimistic"),
-    ("0.528", "VIII-B", "e3_onset.json", "breakpoint_ci95.1",
+    ("0.528", "VIII-B", "e24_breakpoint_ci/summary.json", "n_of_n.ci95.1",
      "n-out-of-n CI high, quoted only to reject as optimistic"),
+    ("0.528", "VIII-B", "e3_onset.json", "breakpoint_ci95.1",
+     "upper end of the in-distribution comparison region fg <= 0.528"),
     ("0.362", "VIII-B", "e24_breakpoint_ci/summary.json", "m_of_n.ci95.0",
      "m-out-of-n CI low, the reported interval"),
     ("0.682", "VIII-B", "e24_breakpoint_ci/summary.json", "m_of_n.ci95.1",
@@ -117,14 +121,17 @@ CLAIMS: list[tuple[str, str, str, str, str]] = [
     ("62", "VIII-G", "e4_summary.json", "extreme_segformer.n", "n for that AUROC"),
     ("8", "VIII-G", "e4_summary.json", "extreme_segformer.n_fail",
      "failures among them"),
-    ("0.729", "VIII-G", "e4_summary.json", "extreme_all_models.auroc_disagreement",
+    ("0.743", "VIII-G", "e4_summary.json", "extreme_all_models.auroc_disagreement",
      "guard AUROC, four frontends x Extreme"),
-    ("0.774", "VIII-G", "e4_summary.json", "pooled_all.auroc_disagreement",
+    ("0.783", "VIII-G", "e4_summary.json", "pooled_all.auroc_disagreement",
      "guard AUROC, pooled"),
     ("488", "VIII-G", "e4_summary.json", "pooled_all.n", "n pooled"),
-    ("0.764", "VIII-G", "e4_summary.json", "pooled_all.auroc_fg_dev",
+    ("14", "VIII-G", "e4_summary.json", "extreme_all_models.n_fail",
+     "failures among the 248 four-frontend Extreme records"),
+    ("22", "VIII-G", "e4_summary.json", "pooled_all.n_fail", "failures pooled"),
+    ("0.762", "VIII-G", "e4_summary.json", "pooled_all.auroc_fg_dev",
      "foreground-deviation baseline AUROC, pooled"),
-    ("0.758", "VIII-G", "e4_summary.json", "pooled_all.auroc_cc_dev",
+    ("0.768", "VIII-G", "e4_summary.json", "pooled_all.auroc_cc_dev",
      "component-count-deviation baseline AUROC, pooled"),
 
     # --- Section VII-C, guard applied to the design verdicts (E15) ------

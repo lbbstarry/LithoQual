@@ -95,7 +95,8 @@ def main() -> None:
                        np.linspace(0.5, 1.0, 26))
     colours = {"hrnet": EXTREME, "deeplabv3plus": IN_DIST, "unet": "#7A7A7A"}
     labels = {"hrnet": "HRNet", "deeplabv3plus": "DeepLabV3+", "unet": "U-Net"}
-    for fb in FALLBACKS:
+    # legend in the paper-wide model order, not FALLBACKS' committed-first order
+    for fb in sorted(FALLBACKS, key=["unet", "deeplabv3plus", "hrnet"].index):
         sweep = [routed_errors(dis, "extreme", fb, float(t)) for t in grid]
         axs.plot([s["flag_rate"] for s in sweep],
                  [s["cd_mae_after"] for s in sweep],

@@ -9,18 +9,18 @@
   },
   "extreme_all_models": {
     "n": 248,
-    "n_fail": 13,
+    "n_fail": 14,
     "spearman_d_vs_err": 0.23570726251494598,
-    "auroc_disagreement": 0.7292962356792144,
-    "auroc_fg_dev": 0.776759410801964,
-    "auroc_cc_dev": 0.7649754500818331
+    "auroc_disagreement": 0.742979242979243,
+    "auroc_fg_dev": 0.7562576312576312,
+    "auroc_cc_dev": 0.7786935286935287
   },
   "pooled_all": {
     "n": 488,
-    "n_fail": 21,
+    "n_fail": 22,
     "spearman_d_vs_err": 0.4606408439911094,
-    "auroc_disagreement": 0.7739369837870909,
-    "auroc_fg_dev": 0.7637401855817273,
-    "auroc_cc_dev": 0.7577750586315897
+    "auroc_disagreement": 0.7825790089738588,
+    "auroc_fg_dev": 0.7615587202497074,
+    "auroc_cc_dev": 0.7677038626609443
   }
 }

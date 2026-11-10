@@ -5,16 +5,17 @@ samples, columns = SEM+reference | DeepLabV3+ | SegFormer (the fallback and
 the frontend the guard routes away from). Claim-only overlay grammar shared
 with fig1: cyan = claimed and agreed, red = claimed and spurious; misses are
 sub-percent boundary slivers on both samples and are not painted. Per-cell
-CD error printed on the plate, red when above tau_sigma = 2.65 px.
+CD error printed on the plate, red when above tau_sigma (read from e3_onset.json).
 
 Row story: #14 is an architecture-specific SegFormer collapse (CNNs at
-<=0.35 px on the same image); #22 is read low by every frontend (~3.4 px
+<=0.08 px on the same image); #22 is read low by every frontend (~3.4 px
 each) because all four claim a border-cut line the reference excludes --
 model at fault above, reference at fault below.
 """
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import matplotlib
@@ -41,7 +42,8 @@ SAMPLES = ["14", "22"]
 MODELS = ["deeplabv3plus", "segformer"]
 COL_TITLES = ["SEM + reference", "DeepLabV3+", "SegFormer"]
 VERDICTS = {"14": "model fails", "22": "reference misses"}
-TAU = 2.65
+# tau_sigma = Extreme CD noise floor on the 512 metrology grid (Sec. V)
+TAU = json.load(open(ROOT / "output/revision_v4/e3_onset.json"))["tau_px"]
 
 RED_CALLOUT = "#E53935"
 CYAN = "#22D7E6"

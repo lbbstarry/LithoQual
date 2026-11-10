@@ -20,8 +20,8 @@ of Deep Segmentation for Lithography Metrology》** 的代码。
 python scripts/verify_claims.py
 ```
 
-该脚本保存了论文所印的 91 个数值，每个都配有对应的工件字段；它把工件值按论文
-精度舍入后比对，任何不一致都会以非零退出码报错。预期输出：`91/91 claims verified`。
+该脚本保存了论文所印的 94 个数值，每个都配有对应的工件字段；它把工件值按论文
+精度舍入后比对，任何不一致都会以非零退出码报错。预期输出：`94/94 claims verified`。
 
 ## 代码证明了什么
 

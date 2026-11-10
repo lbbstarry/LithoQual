@@ -62,94 +62,94 @@
       "setting": "extreme_all_models",
       "statistic": "disagreement",
       "n": 248,
-      "n_fail": 13,
-      "auroc": 0.7292962356792144,
-      "ci_lo": 0.43250015352493243,
-      "ci_hi": 0.9918367346938776
+      "n_fail": 14,
+      "auroc": 0.742979242979243,
+      "ci_lo": 0.4478620930105262,
+      "ci_hi": 0.9907786885245902
     },
     {
       "setting": "extreme_all_models",
       "statistic": "fg_dev",
       "n": 248,
-      "n_fail": 13,
-      "auroc": 0.776759410801964,
-      "ci_lo": 0.6181449275362318,
-      "ci_hi": 1.0
+      "n_fail": 14,
+      "auroc": 0.7562576312576312,
+      "ci_lo": 0.6096242243162492,
+      "ci_hi": 0.996443390634262
     },
     {
       "setting": "extreme_all_models",
       "statistic": "cc_dev",
       "n": 248,
-      "n_fail": 13,
-      "auroc": 0.7649754500818331,
-      "ci_lo": 0.5682746175393234,
-      "ci_hi": 0.9822937732450023
+      "n_fail": 14,
+      "auroc": 0.7786935286935287,
+      "ci_lo": 0.5790368357487923,
+      "ci_hi": 0.9798410172325103
     },
     {
       "setting": "extreme_all_models",
       "statistic": "diff_disagreement_minus_fg_dev",
       "n": 248,
-      "n_fail": 13,
-      "auroc": -0.0441549204573577,
-      "ci_lo": -0.4388630136386971,
-      "ci_hi": 0.3142214884506774
+      "n_fail": 14,
+      "auroc": -0.008990583393985358,
+      "ci_lo": -0.38001679463817994,
+      "ci_hi": 0.32692004730432234
     },
     {
       "setting": "extreme_all_models",
       "statistic": "diff_disagreement_minus_cc_dev",
       "n": 248,
-      "n_fail": 13,
-      "auroc": -0.024028905409250352,
-      "ci_lo": -0.42493073239396767,
-      "ci_hi": 0.35719194521530295
+      "n_fail": 14,
+      "auroc": -0.0255281779709864,
+      "ci_lo": -0.4089307937659776,
+      "ci_hi": 0.3391651871983393
     },
     {
       "setting": "pooled_all",
       "statistic": "disagreement",
       "n": 488,
-      "n_fail": 21,
-      "auroc": 0.7739369837870909,
-      "ci_lo": 0.5919956948000938,
-      "ci_hi": 0.9915820048045424
+      "n_fail": 22,
+      "auroc": 0.7825790089738588,
+      "ci_lo": 0.603730804155614,
+      "ci_hi": 0.9898842300865531
     },
     {
       "setting": "pooled_all",
       "statistic": "fg_dev",
       "n": 488,
-      "n_fail": 21,
-      "auroc": 0.7637401855817273,
-      "ci_lo": 0.5608494077074195,
-      "ci_hi": 0.967550001264551
+      "n_fail": 22,
+      "auroc": 0.7615587202497074,
+      "ci_lo": 0.5631323758513248,
+      "ci_hi": 0.9471682278923623
     },
     {
       "setting": "pooled_all",
       "statistic": "cc_dev",
       "n": 488,
-      "n_fail": 21,
-      "auroc": 0.7577750586315897,
-      "ci_lo": 0.5888041315366815,
-      "ci_hi": 0.9765431647342481
+      "n_fail": 22,
+      "auroc": 0.7677038626609443,
+      "ci_lo": 0.6017813846982759,
+      "ci_hi": 0.9759603938483118
     },
     {
       "setting": "pooled_all",
       "statistic": "diff_disagreement_minus_fg_dev",
       "n": 488,
-      "n_fail": 21,
-      "auroc": 0.012008822955288764,
-      "ci_lo": -0.2821826999700188,
-      "ci_hi": 0.32896612980004636
+      "n_fail": 22,
+      "auroc": 0.0230393385358254,
+      "ci_lo": -0.2570329557759064,
+      "ci_hi": 0.33129784669993717
     },
     {
       "setting": "pooled_all",
       "statistic": "diff_disagreement_minus_cc_dev",
       "n": 488,
-      "n_fail": 21,
-      "auroc": 0.021495204324171843,
-      "ci_lo": -0.2697507507175743,
-      "ci_hi": 0.31182255296572925
+      "n_fail": 22,
+      "auroc": 0.01932637335965681,
+      "ci_lo": -0.2602573479236136,
+      "ci_hi": 0.303049743350371
     }
   ],
-  "tau_px": 2.651473326931816,
+  "tau_px": 2.3782590117512803,
   "comparisons": {
     "extreme_segformer:disagreement_vs_fg_dev": {
       "p_raw": 0.8084042021010506,
@@ -160,19 +160,19 @@
       "p_holm": 1.0
     },
     "extreme_all_models:disagreement_vs_fg_dev": {
-      "p_raw": 0.8144072036018009,
+      "p_raw": 0.9394697348674337,
       "p_holm": 1.0
     },
     "extreme_all_models:disagreement_vs_cc_dev": {
-      "p_raw": 0.9464732366183092,
+      "p_raw": 0.9314657328664332,
       "p_holm": 1.0
     },
     "pooled_all:disagreement_vs_fg_dev": {
-      "p_raw": 0.97,
+      "p_raw": 0.912,
       "p_holm": 1.0
     },
     "pooled_all:disagreement_vs_cc_dev": {
-      "p_raw": 0.902,
+      "p_raw": 0.917,
       "p_holm": 1.0
     }
   }

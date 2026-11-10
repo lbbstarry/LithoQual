@@ -374,7 +374,7 @@ def panel_c(ax) -> None:
     ax.text(bp, 0.975, f"breakpoint {bp:.2f}\n[{ci[0]:.2f}, {ci[1]:.2f}]",
             transform=ax.get_xaxis_transform(), fontsize=5.8, color=ORANGE,
             ha="center", va="top")
-    ax.text(0.745, tau * 1.5, "$\\tau_\\sigma$ = 2.65 px", fontsize=6,
+    ax.text(0.745, tau * 1.5, f"$\\tau_\\sigma$ = {tau:.2f} px", fontsize=6,
             color=NEUTRAL_MID, ha="right")
     ax.set_xlabel("foreground ratio", fontsize=7)
     ax.set_ylabel("SegFormer CD MAE (px)", fontsize=7)
@@ -430,64 +430,74 @@ def panel_loop(ax) -> None:
     the two mechanisms this paper adds --- out-of-window qualification on the
     frontend, a reference-free guard beneath it --- each pointing at the
     evidence panel that carries it."""
+    # equal aspect: one data unit is the same length in x and y, so the
+    # rounded corners stay circular whatever height the row is given
+    bbox = ax.get_position()
+    fw, fh = ax.figure.get_size_inches()
     ax.set_xlim(0, 100)
-    ax.set_ylim(0, 28)
+    ax.set_ylim(0, 100 * (bbox.height * fh) / (bbox.width * fw))
     ax.axis("off")
 
     stages = [
-        (2.0, "Layout\n(design intent)", BASE_MID),
-        (22.5, "Litho\n+ SEM image", BASE_MID),
-        (43.0, "Segmentation\nfrontend", RED_STRONG),
-        (63.5, "Metrology\nCD · LWR · LER", BASE_MID),
-        (84.0, "Design decision\nPW · topology", BASE_MID),
+        (0.6, "Layout\n(design intent)", BASE_MID),
+        (21.6, "Litho\n+ SEM image", BASE_MID),
+        (42.6, "Segmentation\nfrontend", RED_STRONG),
+        (63.6, "Metrology\nCD · LWR · LER", BASE_MID),
+        (84.6, "Design decision\nPW · topology", BASE_MID),
     ]
-    w, h, y = 14.0, 10.0, 15.0
+    w, h, y = 15.2, 4.6, 6.8
+    box = "round,pad=0.3,rounding_size=0.9"
     for x, label, color in stages:
         learned = color == RED_STRONG
         ax.add_patch(FancyBboxPatch(
-            (x, y), w, h, boxstyle="round,pad=0.35,rounding_size=1.1",
-            linewidth=1.5 if learned else 0.9,
-            edgecolor=color, facecolor="white" if learned else "#F4F6FB",
-            zorder=3))
+            (x, y), w, h, boxstyle=box,
+            linewidth=1.8 if learned else 1.1,
+            edgecolor=color, facecolor="#FCEFEF" if learned else "#EEF1F8",
+            zorder=3, clip_on=False))
         ax.text(x + w / 2, y + h / 2, label, ha="center", va="center",
-                fontsize=6.0, color=color if learned else "#303030",
-                fontweight="bold" if learned else "normal", zorder=4)
+                fontsize=7.2, color=color if learned else "#262626",
+                fontweight="bold" if learned else "normal",
+                linespacing=1.25, zorder=4)
     for x, _, _ in stages[:-1]:
-        ax.annotate("", xy=(x + w + 5.8, y + h / 2),
+        ax.annotate("", xy=(x + 21.0 - 0.7, y + h / 2),
                     xytext=(x + w + 0.7, y + h / 2),
-                    arrowprops=dict(arrowstyle="->", lw=0.9, color=NEUTRAL_MID))
+                    arrowprops=dict(arrowstyle="-|>", mutation_scale=8,
+                                    lw=1.1, color=NEUTRAL_MID,
+                                    shrinkA=0, shrinkB=0))
 
     # what fails, and which panels show it, hangs off the learned stage
-    ax.text(43.0 + w / 2, y + h + 1.2,
+    ax.text(42.6 + w / 2, y + h + 0.75,
             "trained model, no reference at run time",
-            ha="center", va="bottom", fontsize=5.8, color=RED_STRONG)
-    ax.text(43.0 - 1.2, y - 2.0, "fails out of window (b–d)",
-            ha="right", va="top", fontsize=5.4, color=NEUTRAL_MID)
-    ax.text(84.0 + w / 2, y - 2.0, "the ordering inverts (e)",
-            ha="center", va="top", fontsize=5.4, color=NEUTRAL_MID)
+            ha="center", va="bottom", fontsize=6.6, color=RED_STRONG)
+    ax.text(42.6 - 1.0, y - 0.9, "fails out of window (b–d)",
+            ha="right", va="top", fontsize=6.3, color=NEUTRAL_MID)
+    ax.text(84.6 + w / 2, y - 0.9, "IoU does not rank them (e)",
+            ha="center", va="top", fontsize=6.3, color=NEUTRAL_MID)
 
-    # the guard, hooked between the frontends and the metrology they feed
-    gx, gy, gw, gh = 40.0, 1.2, 38.0, 6.6
+    # the guard, hooked between the frontends and the metrology they feed;
+    # solid box, dashed arrows: the side path, not a second chain stage
+    gx, gy, gw, gh = 34.5, 0.55, 52.5, 2.9
     ax.add_patch(FancyBboxPatch(
-        (gx, gy), gw, gh, boxstyle="round,pad=0.35,rounding_size=1.1",
-        linewidth=1.2, edgecolor=TEAL, facecolor="white",
-        linestyle=(0, (4, 2)), zorder=3))
+        (gx, gy), gw, gh, boxstyle=box,
+        linewidth=1.3, edgecolor=TEAL, facecolor="#E9F4F5", zorder=3,
+        clip_on=False))
     ax.text(gx + gw / 2, gy + gh / 2,
             "runtime guard: cross-frontend disagreement — "
             "flag & reroute, no reference (f)",
-            ha="center", va="center", fontsize=5.5, color=TEAL, zorder=4)
-    ax.annotate("", xy=(50.0, gy + gh + 0.2), xytext=(50.0, y - 0.2),
-                arrowprops=dict(arrowstyle="->", lw=0.9, color=TEAL,
-                                linestyle=(0, (4, 2)), shrinkA=0, shrinkB=0))
-    ax.annotate("", xy=(70.5, y - 0.2), xytext=(70.5, gy + gh + 0.2),
-                arrowprops=dict(arrowstyle="->", lw=0.9, color=TEAL,
-                                linestyle=(0, (4, 2)), shrinkA=0, shrinkB=0))
+            ha="center", va="center", fontsize=6.8, color="#2F7A83",
+            zorder=4)
+    dashed = dict(arrowstyle="-|>", mutation_scale=7, lw=1.1, color=TEAL,
+                  linestyle=(0, (2, 1.4)), shrinkA=0, shrinkB=0)
+    ax.annotate("", xy=(50.2, gy + gh + 0.35), xytext=(50.2, y - 0.35),
+                arrowprops=dashed)
+    ax.annotate("", xy=(71.2, y - 0.35), xytext=(71.2, gy + gh + 0.35),
+                arrowprops=dashed)
 
 
 def panel_e(ax) -> None:
-    """The decision inverts: Extreme overlap does not rank the wrong-call
-    count the masks exist to prevent (Sec. VII). Four points, one per
-    frontend, directly labelled."""
+    """Extreme overlap does not rank the wrong-call count the masks exist to
+    prevent (Sec. VII); no pair is separable at n = 65, so the panel claims
+    no inversion. Four points, one per frontend, directly labelled."""
     ver = json.load(open(
         ROOT / "output/revision_v4/e13_layout_dfm/summary.json"))["frontends"]
     pts = {}
@@ -519,7 +529,7 @@ def panel_e(ax) -> None:
     ax.set_xticks([0.93, 0.95, 0.97, 0.99])
     ax.set_xlabel("Extreme IoU", fontsize=7)
     ax.set_ylabel("wrong design calls", fontsize=7)
-    ax.set_title("(e) The decision inverts", fontsize=7.5, fontweight="bold")
+    ax.set_title("(e) IoU does not rank decisions", fontsize=7.5, fontweight="bold")
     ax.tick_params(labelsize=6)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -527,8 +537,9 @@ def panel_e(ax) -> None:
 
 def panel_f(ax) -> None:
     """The guard's payoff: worst-case Extreme CD error per deployment policy
-    (Sec. VI-E). Every guarded pairing caps the tail at the same value, below
-    any fixed frontend --- without knowing which frontend to trust."""
+    (Sec. VI-E). Every guarded pairing cuts the tail to the same value, the
+    level of the fixed CNNs (all five maxima sit on the reference miss #22)
+    --- without knowing which frontend to trust."""
     pol = json.load(open(
         ROOT / "output/revision_v4/e22_policy/summary.json"))["cd_error"]
     fbs = ["unet", "deeplabv3plus", "hrnet"]
@@ -545,9 +556,9 @@ def panel_f(ax) -> None:
         ax.text(v * 1.18, yi, f"{v:.2f}" if v < 10 else f"{v:.1f}",
                 fontsize=5.8, va="center", zorder=4)
     ax.text(routed_max * 3.4, ys[-1],
-            "every pairing, below\nany fixed frontend",
+            "every pairing, at the\nbest fixed level",
             fontsize=5.2, color=NEUTRAL_MID, va="center", zorder=4)
-    tau = 2.65
+    tau = json.load(open(ROOT / "output/revision_v4/e3_onset.json"))["tau_px"]
     ax.axvline(tau, color=NEUTRAL_MID, lw=0.9, ls=":", zorder=2)
     ax.text(tau * 1.12, -0.62, "$\\tau_\\sigma$", fontsize=5.6,
             color=NEUTRAL_MID, ha="left", va="center")
@@ -557,7 +568,7 @@ def panel_f(ax) -> None:
     ax.set_yticks(list(ys), [r[0] for r in rows], fontsize=5.8)
     ax.tick_params(axis="y", length=0, pad=1.5)
     ax.set_xlabel("worst-case Extreme CD error (px)", fontsize=7)
-    ax.set_title("(f) The guard bounds the tail", fontsize=7.5,
+    ax.set_title("(f) The guard cuts the tail", fontsize=7.5,
                  fontweight="bold")
     ax.tick_params(labelsize=6)
     ax.spines["top"].set_visible(False)
@@ -573,11 +584,12 @@ def main() -> None:
     # Gaps are explicit spacer rows (hspace 0), because a shared hspace sizes
     # every gap for the busiest one: the (a)-(b) gap needs only the (b) title
     # line, the (b)-(c) gap must also hold the tile legend and panel titles.
-    fig = plt.figure(figsize=(7.16, 4.92))
+    # Row (a) got 0.18 in of extra height; the other rows keep their size.
+    fig = plt.figure(figsize=(7.16, 5.10))
     gs = gridspec.GridSpec(5, 24, figure=fig,
-                           height_ratios=[0.62, 0.185, 1.50, 0.34, 1.24],
+                           height_ratios=[0.784, 0.185, 1.50, 0.34, 1.24],
                            hspace=0.0, wspace=4.0,
-                           left=0.062, right=0.985, top=0.955, bottom=0.082)
+                           left=0.062, right=0.985, top=0.9567, bottom=0.079)
 
     panel_loop(fig.add_subplot(gs[0, :]))
     fig.text(0.062, gs[0, :].get_position(fig).y1 + 0.012,

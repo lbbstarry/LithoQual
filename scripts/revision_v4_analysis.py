@@ -54,6 +54,7 @@ SPLITS = {
     },
 }
 LAYOUT_DIR = REPO / "dataset/litho_hard/layout_manual/hard"
+METRO_GRID = (512, 512)  # prediction grid; eval_metrology.py measures every error on it
 TRAIN_MASK_DIR = REPO / "dataset/litho/masks/train"
 RNG = np.random.default_rng(42)
 SUMMARY: dict[str, object] = {}
@@ -221,7 +222,12 @@ def e1b_noise_floor() -> None:
         gt_dir = Path(SPLITS[split]["gt"])
         acc: dict[str, dict[str, list[float]]] = {}
         for name in names_of(split):
-            pm = perturb_metrics(load_bin(gt_dir / f"{name}.png"))
+            # Perturb on the grid every frontend error is measured on: the
+            # 1024x1024 reference is resized (nearest) to the 512x512 prediction
+            # grid by eval_metrology.py, so a one-pixel boundary uncertainty is
+            # one pixel of that grid, not of the native acquisition.
+            gt = resize_like(load_bin(gt_dir / f"{name}.png"), METRO_GRID)
+            pm = perturb_metrics(gt)
             for mode, d in pm.items():
                 for k, v in d.items():
                     acc.setdefault(mode, {}).setdefault(k, []).append(v)

@@ -79,6 +79,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     p.add_argument("--out", default=str(OUT_DIR))
+    p.add_argument("--reuse-scores", action="store_true",
+                   help="skip inference and rescore the saved scores.csv; MC-dropout "
+                        "is unseeded, so rerunning inference would move its values")
     return p.parse_args()
 
 
@@ -153,7 +156,7 @@ def main() -> None:
     rows: dict[tuple[str, str, str], dict] = {}
     prob_cache: dict[tuple[str, str], dict[str, np.ndarray]] = {}
 
-    for model in MODELS:
+    for model in ([] if args.reuse_scores else MODELS):
         cfg = load_config(str(REPO_ROOT / f"scripts/baselines/configs/{model}.yaml"))
         net = build_model(cfg["model"], num_classes=cfg["data"]["num_classes"]).to(args.device)
         state = torch.load(str(CKPT).format(m=model), map_location=args.device)
@@ -217,8 +220,11 @@ def main() -> None:
                     var, boundary_mask(probs[model])
                 )
 
-    scores = pd.DataFrame(rows.values())
-    scores.to_csv(out_dir / "scores.csv", index=False)
+    if args.reuse_scores:
+        scores = pd.read_csv(out_dir / "scores.csv", dtype={"name": str})
+    else:
+        scores = pd.DataFrame(rows.values())
+        scores.to_csv(out_dir / "scores.csv", index=False)
 
     dis = pd.read_csv(DISAGREEMENT, dtype={"name": str}).dropna(subset=["abs_err_cd_mean"])
     scores["name"] = scores["name"].astype(str)

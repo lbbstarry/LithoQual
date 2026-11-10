@@ -23,9 +23,9 @@ manuscript can be checked against the artifact that produced it:
 python scripts/verify_claims.py
 ```
 
-It holds 91 values as the paper prints them, each paired with an artifact field,
+It holds 94 values as the paper prints them, each paired with an artifact field,
 rounds the artifact value to the printed precision, and exits nonzero on any
-disagreement. Expected output: `91/91 claims verified`.
+disagreement. Expected output: `94/94 claims verified`.
 
 ## What the code establishes
 
